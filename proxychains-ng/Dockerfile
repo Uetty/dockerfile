@@ -1,6 +1,6 @@
 FROM ubuntu:18.04
 
-COPY proxychains-ng /data/proxychains-ng
+COPY proxychains-ng.tar /data/proxychains-ng.tar
 
 RUN \
     apt-get update && \
