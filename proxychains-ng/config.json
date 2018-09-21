@@ -1,9 +1,9 @@
 {
-        "server":"hk01.cnode.xyz",
-        "server_port":5283,
+        "server":"xx.xx.xx.xx",
+        "server_port":xxxx,
         "local_address":"127.0.0.1",
         "local_port":1080,
-        "password":"uqvm9wabkt",
+        "password":"xxxxx",
         "timeout":300,
         "method":"aes-256-cfb",
         "fast_open":true,
