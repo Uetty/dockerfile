@@ -7,6 +7,17 @@ RUN \
     echo mysql-server-5.7 mysql-server/root_password_again password 123456 | debconf-set-selections && \
     apt-get install -y mysql-server && \
     apt-get install -y vim && \
+    tar -cf /mysql-initialize-data.tar /var/lib/mysql && \
+
+    echo '#!/bin/bash' >> /initialize.sh && \
+    echo 'if [[ "`ls /var/lib/mysql`" = "" ]]; then' >> /initialize.sh && \
+    echo 'echo "copy default data"' >> /initialize.sh && \
+    echo 'tar -xf /mysql-initialize-data.tar;' >> /initialize.sh && \
+    echo 'else' >> /initialize.sh && \
+    echo 'echo "data exist"' >> /initialize.sh && \
+    echo 'fi' >> /initialize.sh && \
+
+    chmod +x /initialize.sh && \
 
     # 清理垃圾
     apt-get clean && \
@@ -17,4 +28,4 @@ COPY mysqld.cnf /etc/mysql/mysql.conf.d/mysqld.cnf
 
 ENV LANG C.UTF-8
 
-CMD ["bash"]
+ENTRYPOINT cd / && ./initialize.sh && service mysql start && /bin/bash
