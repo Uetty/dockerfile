@@ -16,6 +16,9 @@ RUN \
     echo 'else' >> /initialize.sh && \
     echo 'echo "data exist"' >> /initialize.sh && \
     echo 'fi' >> /initialize.sh && \
+    echo 'chmod -R 777 /mysql-initialize-data.tar;' >> /initialize.sh && \
+    echo 'chmod -R 777 /var/lib/mysql' >> /initialize.sh && \
+    echo 'rm -rf /mysql-initialize-data.tar;' >> initialize.sh && \
 
     chmod +x /initialize.sh && \
 
@@ -28,4 +31,4 @@ COPY mysqld.cnf /etc/mysql/mysql.conf.d/mysqld.cnf
 
 ENV LANG C.UTF-8
 
-ENTRYPOINT cd / && ./initialize.sh && service mysql start && /bin/bash
+ENTRYPOINT chmod 644 /etc/mysql/mysql.conf.d/mysqld.cnf && cd / && ./initialize.sh && service mysql start && /bin/bash
