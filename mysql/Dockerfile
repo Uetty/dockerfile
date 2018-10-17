@@ -23,7 +23,7 @@ RUN \
 
 COPY mysqld.cnf /etc/mysql/mysql.conf.d/mysqld.cnf
 
-VOLUME ["/data/"]
+VOLUME ["/var/lib/mysql"]
 
 ENV LANG C.UTF-8
 
