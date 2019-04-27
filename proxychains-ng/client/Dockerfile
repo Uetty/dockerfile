@@ -1,7 +1,5 @@
 FROM ubuntu:18.04
 
-COPY proxychains-ng.tar /data/proxychains-ng.tar
-
 RUN \
     apt-get update && \
     apt-get install -y python-pip && \
@@ -11,11 +9,12 @@ RUN \
     apt-get autoremove && \
     rm -rf /var/lib/apt/lists/*
 
-COPY config.json /etc/shadowsocks.json
-COPY readme.en_US.md /data/readme.en_US.md
-COPY readme.zh_CN.md /data/readme.zh_CN.md
-
 ENV LANG C.UTF-8
+
+COPY config.json /etc/shadowsocks.json
+COPY readme.en_US.md /readme/readme.en_US.md
+COPY readme.zh_CN.md /readme/readme.zh_CN.md
+COPY proxychains-ng.tar /data/proxychains-ng.tar
 
 # sslocal -c /etc/shadowsocks.json -d start && /bin/bash
 CMD ["/bin/bash"]

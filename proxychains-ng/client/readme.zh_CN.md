@@ -1,12 +1,14 @@
-# 使用方法
+# 这是本地客户端的使用方法
 ## 初次启动
 1. 宿主机上运行启动容器命令：
-   docker run --net=host --name=socks -t uetty/shadowsocks
+   docker run --net=host --name=socks -t uetty/shadowsocks:client
    ctrl + c 退出
 2. 进入容器内部：
    docker exec -it socks bash
-   修改 /etc/shadowsocks.json 文件：
+   修改 /etc/shadowsocks.json 文件(vim /etc/shadowsocks.json)：
+   按i键编辑文件
    修改服务器地址、端口、密码、以及加密方式(method)
+   保存(依次：ctrl + c  ->  输入:wq  ->  回车)
 3. 在容器内部运行命令：
    sslocal -c /etc/shadowsocks.json -d start
    退出容器，先后按下：
